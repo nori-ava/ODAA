@@ -1,0 +1,33 @@
+{
+  "overallStatus": "Review Required",
+  "summary": {
+    "checks": 12,
+    "schemas": 52
+  },
+  "findings": [
+    {
+      "check": "Users Privilege",
+      "severity": "Review Required",
+      "count": 16,
+      "description": "Users require privilege review before migration."
+    },
+    {
+      "check": "Non-Exported Object Grants",
+      "severity": "Review Required",
+      "count": 6,
+      "description": "Object grants not included in export were detected."
+    },
+    {
+      "check": "Timezone Version",
+      "severity": "Review Required",
+      "count": 1,
+      "description": "Timezone version requires review."
+    },
+    {
+      "check": "Enabled Scheduler Jobs",
+      "severity": "Review Suggested",
+      "count": 21,
+      "description": "Enabled scheduler jobs were detected."
+    }
+  ]
+}
