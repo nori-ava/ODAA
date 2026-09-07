@@ -1,0 +1,63 @@
+# Oracle ZDM Physical Migration response file template for Oracle 19c -> Oracle Database@Azure
+# Copy this file to a secured location and populate actual values before running ZDM.
+# Do not store passwords or private keys in source control.
+
+# Basic environment
+ZDM_HOST=zdm01.example.local
+ZDM_SSH_USER=opc
+ZDM_SSH_KEY=/home/zdmuser/.ssh/id_rsa
+SOURCE_DB_HOST=srcdb01.example.local
+SOURCE_DB_NAME=PRODDB
+SOURCE_DB_UNIQUE_NAME=PRODDB
+SOURCE_DB_SERVICE=PRODDB
+SOURCE_ORACLE_HOME=/u01/app/oracle/product/19.0.0/dbhome_1
+SOURCE_ORACLE_SID=PRODDB
+SOURCE_PDB_NAME=PRODPDB1
+
+TARGET_DB_HOST=targetdb01
+TARGET_DB_NAME=PRODDBAZ
+TARGET_DB_UNIQUE_NAME=PRODDBAZ
+TARGET_ORACLE_HOME=/u02/app/oracle/product/19.0.0.0/dbhome_1
+TARGET_PDB_NAME=PRODPDB1
+TARGET_CDB_NAME=PRODDBAZ
+
+# Migration settings
+MIGRATION_METHOD=ONLINE_PHYSICAL
+MIGRATION_TYPE=PHYSICAL
+MIGRATION_MODE=ONLINE
+MAX_DOWNTIME_MINUTES=30
+ROLLBACK_MODE=YES
+PRECHECK_MODE=ENABLED
+VALIDATION_MODE=ENABLED
+
+# Source / Target compatibility
+SOURCE_VERSION=19.22.0.0
+TARGET_VERSION=19c
+TARGET_PATCH_LEVEL=RU_compatible_with_source
+TARGET_PDB_OPEN_MODE=READ_WRITE
+TARGET_CHARACTER_SET=AL32UTF8
+
+# Network and security
+SSH_PORT=22
+SUDO_PATH=/usr/bin/sudo
+TARGET_SSH_USER=opc
+TARGET_SSH_KEY=/home/zdmuser/.ssh/id_rsa
+WORK_DIR=/tmp/zdm
+LOG_DIR=/var/log/zdm
+
+# Runtime controls
+PARALLEL_WORKERS=4
+COMPRESSION=ON
+VALIDATE_NETWORK_THROUGHPUT=YES
+CHECK_TDE_WALLET=YES
+CHECK_SYS_PASSWORD=YES
+CHECK_FIREWALL_RULES=YES
+
+# Optional: set via environment variables at execution time
+# export SOURCE_SYS_PASSWORD='***'
+# export TARGET_SYS_PASSWORD='***'
+# export TARGET_TDE_WALLET_PASSWORD='***'
+
+# Example ZDM CLI invocation:
+# zdmcli migrate database -rsp ${PWD}/zdm_physical_migration.rsp
+# zdmcli migrate database -rsp ${PWD}/zdm_physical_migration.rsp -eval
